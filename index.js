@@ -11,6 +11,14 @@ const sApp = express();
 const mApp = express();
 
 function startServer(serverConfig, callback) {
+	let sReply = {
+		'result': true,
+		'data': {
+			'service': serverConfig.name,
+			'type': 'rest',
+			'route': "/"
+		}
+	};
     let mReply = {
         'result': true,
         'ts': Date.now(),
@@ -20,28 +28,51 @@ function startServer(serverConfig, callback) {
             'route': "/heartbeat"
         }
     };
-    let sReply = {
-        'result': true,
-        'data': {
-            'firstname': "test",
-            'lastname': "service",
-            'type': "endpoint"
-        }
-    };
 
     sApp.get('/', (req, res) => res.json(sReply));
     mApp.get('/heartbeat', (req, res) => res.json(mReply));
-
+    mApp.get('/maintenance', (req, res) => {
+	    mReply.service.route = "maintenance";
+    	res.json(mReply)
+    });
+	
+	sApp.get("/testGet", (req, res) => {
+		sReply.data.route = "testGet";
+		return res.json(sReply);
+	});
+	
+	sApp.post("/testPost", (req, res) => {
+		sReply.data.route = "testPost";
+		return res.json(sReply);
+	});
+	
+	sApp.put("/testPut", (req, res) => {
+		sReply.data.route = "testPut";
+		return res.json(sReply);
+	});
+	
+	sApp.delete("/testDelete", (req, res) => {
+		sReply.data.route = "testPut";
+		return res.json(sReply);
+	});
+	
+	sApp.put("/testPut", (req, res) => {
+		sReply.data.route = "testPut";
+		return res.json(sReply);
+	});
     sApp.patch("/testPatch", (req, res) => {
-        return res;
+	    sReply.data.route = "testPatch";
+        return res.json(sReply);
     });
 
     sApp.head("/testHead", (req, res) => {
-        return res;
+	    sReply.data.route = "testHead";
+	    return res.json(sReply);
     });
 
     sApp.options("/testOther", (req, res) => {
-        return res;
+	    sReply.data.route = "testOther";
+	    return res.json(sReply);
     });
 
     let sAppServer = sApp.listen(serverConfig.s.port, () => console.log(`${serverConfig.name} service listening on port ${serverConfig.s.port}!`));
@@ -79,33 +110,8 @@ service.init(function () {
         };
     }
     provision.init(dbConfig, service.log);
-
-    // startServer({s: {port: 4010}, m: {port: 5010}, name: "test"},  () => {});
-
-    service.get("/testGet", (req, res) => {
-        return res;
-    });
-
-    service.post("/testPost", (req, res) => {
-        return res;
-    });
-
-    service.put("/testPut", (req, res) => {
-        return res;
-    });
-
-    service.delete("/testDelete", (req, res) => {
-        return res;
-    });
-
-    service.put("/testPut", (req, res) => {
-        return res;
-    });
-
-    // service.start();
 });
 
-module.exports = {
-    startServer: startServer,
-    stopServer: stopServer
-};
+startServer({s: {port: 4010}, m: {port: 5010}, name: "restApiService"}, function (servers) {
+
+});

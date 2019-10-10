@@ -21,6 +21,9 @@
     "port": {
       "type": "inherit"
     },
-    "readiness": "/testhealth"
+    "readiness": "/heartbeat",
+    "commands": [
+      {"label": "labelMain", "path": "/maintenance", "icon": "provision"}
+    ]
   }
 }
