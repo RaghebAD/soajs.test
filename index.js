@@ -11,14 +11,6 @@ const sApp = express();
 const mApp = express();
 
 function startServer(serverConfig, callback) {
-	let sReply = {
-		'result': true,
-		'data': {
-			'service': serverConfig.name,
-			'type': 'rest',
-			'route': "/"
-		}
-	};
     let mReply = {
         'result': true,
         'ts': Date.now(),
@@ -28,52 +20,62 @@ function startServer(serverConfig, callback) {
             'route': "/heartbeat"
         }
     };
+    let sReply = {
+        'result': true,
+        'data': {
+            'firstname': "test",
+            'lastname': "service",
+            'type': "endpoint"
+        }
+    };
 
     sApp.get('/', (req, res) => res.json(sReply));
     mApp.get('/heartbeat', (req, res) => res.json(mReply));
-    mApp.get('/maintenance', (req, res) => {
-	    mReply.service.route = "maintenance";
-    	res.json(mReply)
+
+    sApp.get("/testGet", (req, res) => res.json(sReply));
+
+    sApp.post("/testPost", (req, res) => {
+        let response = {
+            "added": true
+        };
+        return res.json(response);
     });
-	
-	sApp.get("/testGet", (req, res) => {
-		sReply.data.route = "testGet";
-		return res.json(sReply);
-	});
-	
-	sApp.post("/testPost", (req, res) => {
-		sReply.data.route = "testPost";
-		return res.json(sReply);
-	});
-	
-	sApp.put("/testPut", (req, res) => {
-		sReply.data.route = "testPut";
-		return res.json(sReply);
-	});
-	
-	sApp.delete("/testDelete", (req, res) => {
-		sReply.data.route = "testPut";
-		return res.json(sReply);
-	});
-	
-	sApp.put("/testPut", (req, res) => {
-		sReply.data.route = "testPut";
-		return res.json(sReply);
-	});
+
+    sApp.put("/testPut", (req, res) => {
+        let response = {
+            "updated": true
+        };
+        return res.json(response);
+    });
+
+    sApp.delete("/testDelete", (req, res) => {
+        let response = {
+            "deleted": true
+        };
+        return res.json(response);
+    });
+
     sApp.patch("/testPatch", (req, res) => {
-	    sReply.data.route = "testPatch";
-        return res.json(sReply);
+        let response = {
+            "patched": true
+        };
+        return res.json(response);
     });
 
     sApp.head("/testHead", (req, res) => {
-	    sReply.data.route = "testHead";
-	    return res.json(sReply);
+        let response = {
+            "head": true
+        };
+        return res.json(response);
     });
 
     sApp.options("/testOther", (req, res) => {
-	    sReply.data.route = "testOther";
-	    return res.json(sReply);
+        let response = {
+            "other": true
+        };
+        return res.json(response);
     });
+
 
     let sAppServer = sApp.listen(serverConfig.s.port, () => console.log(`${serverConfig.name} service listening on port ${serverConfig.s.port}!`));
     let mAppServer = mApp.listen(serverConfig.m.port, () => console.log(`${serverConfig.name} service listening on port ${serverConfig.m.port}!`));
@@ -99,19 +101,10 @@ function stopServer(config) {
     });
 }
 
-service.init(function () {
-    let reg = service.registry.get();
+startServer({s: {port: 4010}, m: {port: 5010}, name: "test"},  () => {});
 
-    let dbConfig = reg.coreDB.provision;
-    if (reg.coreDB.oauth) {
-        dbConfig = {
-            "provision": reg.coreDB.provision,
-            "oauth": reg.coreDB.oauth
-        };
-    }
-    provision.init(dbConfig, service.log);
-});
 
-startServer({s: {port: 4010}, m: {port: 5010}, name: "test"}, function (servers) {
-
-});
+module.exports = {
+    startServer: startServer,
+    stopServer: stopServer
+};
