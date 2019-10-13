@@ -112,6 +112,6 @@ service.init(function () {
     provision.init(dbConfig, service.log);
 });
 
-startServer({s: {port: 4010}, m: {port: 5010}, name: "restApiService"}, function (servers) {
+startServer({s: {port: 4010}, m: {port: 5010}, name: "test"}, function (servers) {
 
 });

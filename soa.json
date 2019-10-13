@@ -5,7 +5,7 @@
     "memory": " "
   },
   "serviceName": "test",
-  "serviceGroup": "SOAJS Core Services",
+  "serviceGroup": "SOAJS Test Services",
   "servicePort": 4010,
   "swagger": true,
   "requestTimeout": 30,
