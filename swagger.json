@@ -22,8 +22,19 @@
     "https",
     "http"
   ],
+  "definitions": {
+    "test": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "test id"
+        }
+      }
+    }
+  },
   "paths": {
-    "/myroute": {
+    "/testPost": {
       "post": {
         "tags": [
           "test"
@@ -40,8 +51,8 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
-            "description": "test object",
+            "name": "id",
+            "description": "test id",
             "required": true,
             "schema": {
               "$ref": "#/definitions/test"
@@ -55,7 +66,7 @@
         }
       }
     },
-    "/myroute": {
+    "/testPut": {
       "put": {
         "tags": [
           "test"
@@ -72,8 +83,8 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
-            "description": "test object",
+            "name": "id",
+            "description": "test id",
             "required": true,
             "schema": {
               "$ref": "#/definitions/test"
@@ -87,7 +98,7 @@
         }
       }
     },
-    "/myroute": {
+    "/testGet": {
       "get": {
         "tags": [
           "test"
@@ -103,11 +114,13 @@
         ],
         "parameters": [
           {
+            "in": "body",
             "name": "id",
-            "in": "query",
-            "description": "ID",
+            "description": "test id",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/test"
+            }
           }
         ],
         "responses": {
@@ -117,7 +130,7 @@
         }
       }
     },
-    "/myroute": {
+    "/testPatch": {
       "patch": {
         "tags": [
           "test"
@@ -134,8 +147,8 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
-            "description": "test object",
+            "name": "id",
+            "description": "test id",
             "required": true,
             "schema": {
               "$ref": "#/definitions/test"
@@ -147,10 +160,9 @@
             "description": "Invalid input"
           }
         }
-
       }
     },
-    "/myroute": {
+    "/testHead": {
       "head": {
         "tags": [
           "test"
@@ -164,16 +176,14 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
         "responses": {
           "405": {
             "description": "Invalid input"
           }
         }
-
       }
     },
-    "/myroute": {
+    "/testDelete": {
       "delete": {
         "tags": [
           "test"
@@ -189,11 +199,13 @@
         ],
         "parameters": [
           {
+            "in": "body",
             "name": "id",
-            "in": "query",
-            "description": "ID",
+            "description": "test id",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/test"
+            }
           }
         ],
         "responses": {
@@ -203,7 +215,7 @@
         }
       }
     },
-    "/myroute": {
+    "/testOther": {
       "options": {
         "tags": [
           "test"
@@ -217,7 +229,6 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
         "responses": {
           "405": {
             "description": "Invalid input"
