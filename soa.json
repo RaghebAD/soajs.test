@@ -43,7 +43,7 @@
   "requestTimeout": 30,
   "requestTimeoutRenewal": 5,
   "extKeyRequired": true,
-  "oauth": true,
+  "oauth": false,
   "urac": false,
   "urac_Profile": false,
   "urac_ACL": false,
