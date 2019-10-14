@@ -21,7 +21,7 @@
   "program": [
     "soajs"
   ],
-  "swaggerFilename": "./swagger.yml",
+  "swaggerFilename": "./swagger.json",
   "maintenance": {
     "port": {
       "type": "maintenance"
