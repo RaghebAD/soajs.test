@@ -1,29 +1,52 @@
 {
+  "serviceName": "httpmethods",
+  "serviceGroup": "SOAJS test",
+  "servicePort": 4010,
+  "serviceVersion": "1",
+  "description": "This is a mock service to test all http methods",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
+  "attributes": {
+    "att1": [
+      "att1.1",
+      "att1.2"
+    ],
+    "att2": [
+      "att2.1",
+      "att2.2"
+    ]
+  },
+  "program": [
+    "soajs"
+  ],
+  "swaggerFilename": "./swagger.yml",
+  "maintenance": {
+    "port": {
+      "type": "maintenance"
+    },
+    "readiness": "/heartbeat",
+    "commands": [
+      {
+        "label": "My Command",
+        "path": "/wrench",
+        "icon": "wrench"
+      }
+    ]
+  },
   "type": "service",
   "prerequisites": {
     "cpu": " ",
     "memory": " "
   },
-  "serviceName": "test",
-  "serviceGroup": "SOAJS Test Services",
-  "servicePort": 4010,
-  "swagger": true,
   "requestTimeout": 30,
   "requestTimeoutRenewal": 5,
-  "serviceVersion": "1",
-  "extKeyRequired": false,
+  "extKeyRequired": true,
+  "oauth": true,
   "urac": false,
   "urac_Profile": false,
   "urac_ACL": false,
-  "provision_ACL": false,
-  "oauth": false,
-  "maintenance": {
-    "port": {
-      "type": "inherit"
-    },
-    "readiness": "/heartbeat",
-    "commands": [
-      {"label": "labelMain", "path": "/maintenance", "icon": "provision"}
-    ]
-  }
+  "tenant_Profile": false,
+  "provision_ACL": false
 }

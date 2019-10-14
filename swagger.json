@@ -3,7 +3,7 @@
   "info": {
     "description": "Test Service for SoaJS",
     "version": "1.0.0",
-    "title": "SOAJS Test Service",
+    "title": "http methods Test Service",
     "termsOfService": "http://soajs.org/terms/",
     "contact": {
       "email": "fadi@soajs.org"
@@ -26,7 +26,7 @@
     "http"
   ],
   "paths": {
-    "/testPost": {
+    "/myroute": {
       "post": {
         "tags": [
           "test"
@@ -58,7 +58,7 @@
         }
       }
     },
-    "/testPut": {
+    "/myroute": {
       "put": {
         "tags": [
           "test"
@@ -90,7 +90,7 @@
         }
       }
     },
-    "/testGet": {
+    "/myroute": {
       "get": {
         "tags": [
           "test"
@@ -120,7 +120,7 @@
         }
       }
     },
-    "/testPatch": {
+    "/myroute": {
       "patch": {
         "tags": [
           "test"
@@ -153,7 +153,7 @@
 
       }
     },
-    "/testHead": {
+    "/myroute": {
       "head": {
         "tags": [
           "test"
@@ -176,7 +176,7 @@
 
       }
     },
-    "/testDelete": {
+    "/myroute": {
       "delete": {
         "tags": [
           "test"
@@ -206,7 +206,7 @@
         }
       }
     },
-    "/testOther": {
+    "/myroute": {
       "options": {
         "tags": [
           "test"

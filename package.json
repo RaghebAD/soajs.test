@@ -12,15 +12,7 @@
     "node": "*"
   },
   "scripts": {},
-  "devDependencies": {
-    "soajs.controller": "2.5.*",
-    "soajs.mongodb.data": "2.1.*",
-    "soajs.oauth": "2.5.*",
-    "soajs.urac": "2.5.*"
-  },
   "dependencies": {
-    "express": "4.17.1",
-    "soajs": "2.5.14",
-    "soajs.core.drivers": "3.5.18"
+    "express": "4.17.1"
   }
 }
