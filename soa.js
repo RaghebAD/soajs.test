@@ -7,7 +7,7 @@
  */
 
 'use strict';
-
+asdasdasdas
 module.exports = {
 	"type": 'service',
 	"prerequisites": {
