@@ -2,7 +2,7 @@
     "serviceName": "scheduler",
     "serviceGroup": "ECOMP",
     "servicePort": 32556,
-    "serviceVersion": "2.0",
+    "serviceVersion": "3.0",
 
     "description": "ECOMP Scheduler API",
 
