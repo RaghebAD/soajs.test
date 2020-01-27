@@ -14,7 +14,7 @@ module.exports = {
 		cpu: '',
 		memory: ''
 	},
-	"serviceVersion": 1,
+	"serviceVersion": 2,
 	"serviceName": "repositories",
 	"serviceGroup": "SOAJS Core Services",
 	"servicePort": 4005,
