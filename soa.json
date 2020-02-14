@@ -13,7 +13,7 @@
   },
   "program": ["5G"],
 
-  "swaggerFilename": "/scheduler-calendar/swagger.json",
+  "swaggerFilename": "/swagger.json",
 
   "maintenance": {
     "port": {
