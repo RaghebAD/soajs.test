@@ -1,17 +1,17 @@
 {
-    "serviceName": "scheduler",
+    "serviceName": "schedulercellsite2",
     "serviceGroup": "ECOMP",
-    "servicePort": 32556,
+    "servicePort": 32558,
     "serviceVersion": "2.0",
 
-    "description": "ECOMP Scheduler API",
+    "description": "ECOMP Scheduler Cellsite API",
 
-    "tags": ["scheduler", "ecomp"],
+    "tags": ["scheduler", "cellsite", "ecomp"],
     "attributes": {
         "att1": ["att1.1", "att1.2"],
         "att2": ["att2.1", "att2.2"]
     },
-    "program": ["5G"],
+    "program": ["Cellsite"],
 
     "swaggerFilename": "/swagger.json",
 

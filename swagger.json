@@ -1,240 +1,1582 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "Test Service for SoaJS 2",
-    "version": "1.0.0",
-    "title": "http methods Test Service",
-    "termsOfService": "http://soajs.org/terms/",
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1908.0001",
+    "title" : "cellsite"
+  },
+  "host" : "",
+  "basePath" : "/cellsite",
+  "tags" : [ {
+    "name" : "admin"
+  }, {
+    "name" : "cellsite"
+  }, {
+    "name" : "status"
+  } ],
+  "paths" : {
+    "/v1/loopbacktest/calendar" : {
+      "get" : {
+        "summary" : "",
+        "description" : "Returns a list of Scheduler Requests based upon the filter criteria.",
+        "operationId" : "searchScheduleRequests",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "domain",
+          "in" : "query",
+          "description" : "Schedule domain.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "scheduleId",
+          "in" : "query",
+          "description" : "Schedule identifier",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "scheduleName",
+          "in" : "query",
+          "description" : "Schedule name",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "userId",
+          "in" : "query",
+          "description" : "Schedule User id of creator",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "Schedule status",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "createDateTime",
+          "in" : "query",
+          "description" : "Creation date and time (<low date>[,<hi date>])",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "optimizerStatus",
+          "in" : "query",
+          "description" : "Optimizer status",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "dd",
+          "in" : "query",
+          "description" : "Domain data name:Value dd=name:value",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Invalid query scheduler details request."
+          },
+          "404" : {
+            "description" : "No records found"
+          },
+          "500" : {
+            "description" : "Unexpected Runtime error"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "",
+        "description" : "This can be used to mimic calling Calendar to create a schedule. This will just create a SchedulerCalendarEvent for immediate execution",
+        "operationId" : "postCalendar",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "CalendarEvent",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "500" : {
+            "description" : "Unexpected Runtime error"
+          }
+        }
+      }
+    },
+    "/v1/loopbacktest/calendar/{scheduleId}" : {
+      "post" : {
+        "summary" : "",
+        "description" : "Creates a schedule request for scheduleId",
+        "operationId" : "createScheduleRequest",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "scheduleId",
+          "in" : "path",
+          "description" : "Schedule id to uniquely identify the schedule request being created.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Data for creating a schedule request for the given schedule id",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ScheduleMessage"
+          }
+        } ],
+        "responses" : {
+          "202" : {
+            "description" : "Schedule request accepted."
+          },
+          "400" : {
+            "description" : "Invalid schedule create request."
+          },
+          "412" : {
+            "description" : "Schedule request already exists for this schedule id."
+          },
+          "500" : {
+            "description" : "Unexpected Runtime error"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "",
+        "description" : "Deletes a schedule requests for scheduleId",
+        "operationId" : "deleteScheduleRequest",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "scheduleId",
+          "in" : "path",
+          "description" : "Schedule id to uniquely identify the schedule request being deleted.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Delete successful"
+          },
+          "404" : {
+            "description" : "No record found"
+          },
+          "500" : {
+            "description" : "Unexpected Runtime error"
+          }
+        }
+      }
+    },
+    "/v1/loopbacktest/dmaapmr/events/{topic}" : {
+      "post" : {
+        "summary" : "",
+        "description" : "Test SNIRO connection in loopback mode.",
+        "operationId" : "postDmaap",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Topic",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "CalendarEvent",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "500" : {
+            "description" : "Unexpected Runtime error"
+          }
+        }
+      }
+    },
+    "/v1/loopbacktest/dmaapmr/events/{topic}/{group}/{id}" : {
+      "get" : {
+        "summary" : "",
+        "description" : "Test DmaaP Consumer.",
+        "operationId" : "getDmaap",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "topic",
+          "in" : "path",
+          "description" : "Topic",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "group",
+          "in" : "path",
+          "description" : "Group",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          },
+          "202" : {
+            "description" : "OK"
+          },
+          "500" : {
+            "description" : "Unexpected Runtime error"
+          }
+        }
+      }
+    },
+    "/v1/loopbacktest/dmaapmr/topics" : {
+      "get" : {
+        "summary" : "",
+        "description" : "Test DmaaP Consumer.",
+        "operationId" : "getDmaapTopics",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Unexpected Runtime error"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/dmaapsub/{fileName}" : {
+      "put" : {
+        "tags" : [ "cellsite" ],
+        "summary" : "",
+        "description" : "Processies inventory feed..",
+        "operationId" : "getFeedFile",
+        "consumes" : [ "application/octet-stream" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "fileName",
+          "in" : "path",
+          "description" : "fileName",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/health" : {
+      "get" : {
+        "tags" : [ "status" ],
+        "summary" : "",
+        "description" : "Returns health status of server.",
+        "operationId" : "healthCheck",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "checkInterfaces",
+          "in" : "query",
+          "description" : "Check Interfaces",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "boolean",
+            "default" : true
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Health Check Message"
+            }
+          },
+          "400" : {
+            "description" : "Not healthy",
+            "schema" : {
+              "$ref" : "#/definitions/Health Check Message"
+            }
+          }
+        }
+      }
+    },
+    "/{apiVersion}/mw" : {
+      "get" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "API to get configured maintenance windows",
+        "operationId" : "getMaintenanceWindow",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "description" : "name",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Maintenance Window config details"
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "Api to create a maintenance window",
+        "operationId" : "createMaintenenceWindow",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "create maintenance window for eNodeB",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Maintenance Window config details"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/mw/{name}" : {
+      "delete" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "Api to delte maintenance window",
+        "operationId" : "deleteMaintenanceWindow",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "name",
+          "in" : "path",
+          "description" : "name",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/request/immediate" : {
+      "put" : {
+        "tags" : [ "cellsite" ],
+        "summary" : "",
+        "description" : "Schedules in incoming augmenter message",
+        "operationId" : "scheduleImmediateRequest",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "request",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Augmenter Publish Immediate Message"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/schedule" : {
+      "get" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "API to get schedules",
+        "operationId" : "getSchedules",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "scheduleId",
+          "in" : "query",
+          "description" : "scheduleId",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/CalendarSchedule"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{apiVersion}/schedule/{id}" : {
+      "put" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "API to create a new schedule",
+        "operationId" : "createSchedule",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Schedule id to uniquely identify the schedule request being created.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "create a new schedule",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CalendarSchedule"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "Api to delete Schedules",
+        "operationId" : "deleteSchedule",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "scheduleId",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/status/mwi/{id}" : {
+      "get" : {
+        "tags" : [ "status" ],
+        "summary" : "",
+        "description" : "API to retrieve mainentance window instance details",
+        "operationId" : "getMaintenanceWindowInstance",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "archived",
+          "in" : "query",
+          "description" : "archived",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true
+        }, {
+          "name" : "pending",
+          "in" : "query",
+          "description" : "pending",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true
+        }, {
+          "name" : "active",
+          "in" : "query",
+          "description" : "active",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/CellSiteMwi"
+            }
+          }
+        }
+      }
+    },
+    "/{apiVersion}/status/schedule/{id}" : {
+      "get" : {
+        "tags" : [ "status" ],
+        "summary" : "",
+        "description" : "API to retrieve schedule instance and list maintenance window instances",
+        "operationId" : "getScheduleInstance",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "archived",
+          "in" : "query",
+          "description" : "archived",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "pending",
+          "in" : "query",
+          "description" : "pending",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "active",
+          "in" : "query",
+          "description" : "active",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/CellSiteSchedule"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "status" ],
+        "summary" : "",
+        "description" : "API to terminate an active schedule instance",
+        "operationId" : "deleteScheduleInstance",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "id",
+          "in" : "path",
+          "description" : "id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/status/schedules" : {
+      "get" : {
+        "tags" : [ "status" ],
+        "summary" : "",
+        "description" : "API to search schedule instances",
+        "operationId" : "searchScheduleInstances",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "archived",
+          "in" : "query",
+          "description" : "archived",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "pending",
+          "in" : "query",
+          "description" : "pending",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "active",
+          "in" : "query",
+          "description" : "active",
+          "required" : false,
+          "type" : "boolean",
+          "default" : false
+        }, {
+          "name" : "mwi",
+          "in" : "query",
+          "description" : "Include MWIs",
+          "required" : false,
+          "type" : "boolean",
+          "default" : true
+        }, {
+          "name" : "id",
+          "in" : "query",
+          "description" : "Schedule id",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "description" : "Schedule status",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "startTime",
+          "in" : "query",
+          "description" : "Schedule start time",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "scheduleId",
+          "in" : "query",
+          "description" : "Calendar Schedule Id",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.Id",
+          "in" : "query",
+          "description" : "MWI Id",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.timeZoneOffset",
+          "in" : "query",
+          "description" : "MWI Time Zone Offset",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.startOfCycle",
+          "in" : "query",
+          "description" : "MWI Start of Cycle Timw",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.startTime",
+          "in" : "query",
+          "description" : "MWI Start Time",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.endTime",
+          "in" : "query",
+          "description" : "MWI End Time",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.durationInSeconds",
+          "in" : "query",
+          "description" : "MWI Duration In Seconds",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.spansDST",
+          "in" : "query",
+          "description" : "MWI Spans DST Transition",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "mwi.status",
+          "in" : "query",
+          "description" : "MWI Status",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.requiredConcurrency",
+          "in" : "query",
+          "description" : "MWI Required Concurrency",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.totalNumberNodes",
+          "in" : "query",
+          "description" : "MWI Number of Nodes",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        }, {
+          "name" : "mwi.timeoutInSeconds",
+          "in" : "query",
+          "description" : "MWI Timeout in Seconds",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/CellSiteSchedule"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{apiVersion}/submarket" : {
+      "get" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "Returns health status of server.",
+        "operationId" : "getSubmarket",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "submarket",
+          "in" : "query",
+          "description" : "Sub market",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "default" : "*"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Submarket include/exclude status"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{apiVersion}/submarket/{include}/{submarket}" : {
+      "put" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "Returns health status of server.",
+        "operationId" : "putSubmarket",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "include",
+          "in" : "path",
+          "description" : "include|exclude",
+          "required" : true,
+          "type" : "string",
+          "default" : "include"
+        }, {
+          "name" : "submarket",
+          "in" : "path",
+          "description" : "Sub market",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "Deletes the submarket from the include or exclude list.",
+        "operationId" : "deleteSubmarket",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "include",
+          "in" : "path",
+          "description" : "include|exclude",
+          "required" : true,
+          "type" : "string",
+          "default" : "include"
+        }, {
+          "name" : "submarket",
+          "in" : "path",
+          "description" : "Sub market",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/{apiVersion}/test/submarket" : {
+      "get" : {
+        "tags" : [ "admin" ],
+        "summary" : "",
+        "description" : "API to test the results of the submarket include/exclude lists",
+        "operationId" : "testSubmarket",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "apiVersion",
+          "in" : "path",
+          "description" : "v1",
+          "required" : true,
+          "type" : "string",
+          "default" : "v1"
+        }, {
+          "name" : "submarket",
+          "in" : "query",
+          "description" : "Sub market",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "default" : "*"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Submarket include/exclude test status"
+              }
+            }
+          }
+        }
+      }
     }
   },
-  "host": "soajs.org",
-  "basePath": "/v2",
-  "tags": [
-    {
-      "name": "test",
-      "description": "Tests"
-    }
-  ],
-  "schemes": [
-    "https",
-    "http"
-  ],
-  "definitions": {
-    "test": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "test id"
+  "definitions" : {
+    "Augmenter Publish Immediate Message" : {
+      "type" : "object",
+      "properties" : {
+        "requestID" : {
+          "type" : "string"
+        },
+        "elementId" : {
+          "type" : "string"
+        },
+        "namespace" : {
+          "type" : "string"
+        },
+        "origin" : {
+          "type" : "string"
+        },
+        "action" : {
+          "type" : "string"
+        },
+        "ems" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Message published to the Augmenter immediately"
+    },
+    "CalendarSchedule" : {
+      "type" : "object",
+      "required" : [ "rrule", "starttime" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Cellsite schedule id provided by the client."
+        },
+        "scheduleId" : {
+          "type" : "string",
+          "description" : "Calendar schedule id generated by cellsite"
+        },
+        "rrule" : {
+          "type" : "string",
+          "example" : "FREQ=WEEKLY;BYDAY=MO,WE,FR",
+          "description" : "rrule for schedule"
+        },
+        "starttime" : {
+          "type" : "string",
+          "example" : "2018-06-24T12:00:00Z",
+          "description" : "start time"
+        }
+      },
+      "description" : "Calender Schedule details ."
+    },
+    "CellSiteActive" : {
+      "type" : "object",
+      "properties" : {
+        "requestId" : {
+          "type" : "string"
+        },
+        "action" : {
+          "type" : "string"
+        },
+        "elementId" : {
+          "type" : "string"
+        },
+        "ems" : {
+          "type" : "string"
+        },
+        "namespace" : {
+          "type" : "string"
+        },
+        "origin" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "leftoverCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "timestampString" : {
+          "type" : "string"
+        },
+        "cellSiteMwiId" : {
+          "type" : "string"
         }
       }
-    }
-  },
-  "paths": {
-    "/testPost": {
-      "post": {
-        "tags": [
-          "test"
-        ],
-        "summary": "Some Sum2323232323232323232",
-        "description": "",
-        "operationId": "addTest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "test id",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/test"
-            }
+    },
+    "CellSiteArchive" : {
+      "type" : "object",
+      "properties" : {
+        "requestId" : {
+          "type" : "string"
+        },
+        "action" : {
+          "type" : "string"
+        },
+        "elementId" : {
+          "type" : "string"
+        },
+        "ems" : {
+          "type" : "string"
+        },
+        "namespace" : {
+          "type" : "string"
+        },
+        "origin" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "integer"
+        },
+        "leftoverCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "timestampString" : {
+          "type" : "string"
+        },
+        "cellSiteMwiId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CellSiteMwi" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "cellSiteScheduleId" : {
+          "type" : "string"
+        },
+        "durationInSecs" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "endTime" : {
+          "type" : "integer"
+        },
+        "requiredConcurrency" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "spansDst" : {
+          "type" : "boolean"
+        },
+        "startOfCycle" : {
+          "type" : "integer"
+        },
+        "startTime" : {
+          "type" : "integer"
+        },
+        "startTimeString" : {
+          "type" : "string"
+        },
+        "startOfCycleString" : {
+          "type" : "string"
+        },
+        "endTimeString" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "timeoutSeconds" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "timezoneOffset" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "totalNumberNodes" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "actualStartTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "actualEndTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "cellSiteActives" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CellSiteActive"
           }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
+        },
+        "cellSiteArchives" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CellSiteArchive"
+          }
+        },
+        "cellSitePendings" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CellSitePending"
+          }
+        },
+        "actualEndTimeString" : {
+          "type" : "string"
+        },
+        "actualStartTimeString" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CellSitePending" : {
+      "type" : "object",
+      "properties" : {
+        "requestId" : {
+          "type" : "string"
+        },
+        "action" : {
+          "type" : "string"
+        },
+        "elementId" : {
+          "type" : "string"
+        },
+        "ems" : {
+          "type" : "string"
+        },
+        "namespace" : {
+          "type" : "string"
+        },
+        "origin" : {
+          "type" : "string"
+        },
+        "leftoverCount" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "cellSiteMwiId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CellSiteSchedule" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "calendarEvent" : {
+          "type" : "string"
+        },
+        "scheduleId" : {
+          "type" : "string"
+        },
+        "startTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "actualStartTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "actualEndTime" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "startTimeString" : {
+          "type" : "string"
+        },
+        "cellSiteMwis" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/CellSiteMwi"
+          }
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "actualEndTimeString" : {
+          "type" : "string"
+        },
+        "actualStartTimeString" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EventMessage" : {
+      "type" : "object",
+      "properties" : {
+        "eventJson" : {
+          "type" : "object"
+        },
+        "eventTime" : {
+          "type" : "string"
+        },
+        "reminder" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "timeSensitive" : {
+          "type" : "boolean"
+        },
+        "rrule" : {
+          "type" : "string"
+        },
+        "eventData" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/NameValue"
           }
         }
       }
     },
-    "/testPut": {
-      "put": {
-        "tags": [
-          "test"
-        ],
-        "summary": "Some Sum",
-        "description": "",
-        "operationId": "updateTest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "test id",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/test"
-            }
+    "Health Check Component" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Componnent/interface name",
+          "enum" : [ "Database", "Calendar", "DMaaPMR", "CalendarDMaaPMR", "AAF" ]
+        },
+        "url" : {
+          "type" : "string",
+          "description" : "URL representing component/interface"
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "'OK' or error status message"
+        },
+        "healthy" : {
+          "type" : "boolean",
+          "description" : "Component health"
+        }
+      },
+      "description" : "Health of a single component of the instance"
+    },
+    "Health Check Message" : {
+      "type" : "object",
+      "properties" : {
+        "healthy" : {
+          "type" : "boolean",
+          "description" : "Overall health of instance. false if even one component reports not healthy."
+        },
+        "buildInfo" : {
+          "type" : "string",
+          "description" : "Build info (docker image name)"
+        },
+        "currentTime" : {
+          "type" : "string",
+          "description" : "Current time on the instance."
+        },
+        "hostname" : {
+          "type" : "string",
+          "description" : "Hostname (in k8s = pod name)"
+        },
+        "components" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Health Check Component"
           }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
+        }
+      },
+      "description" : "Returns status of calendar service instance"
+    },
+    "Maintenance Window config details" : {
+      "type" : "object",
+      "required" : [ "config" ],
+      "properties" : {
+        "configName" : {
+          "type" : "string",
+          "example" : "GLOBAL",
+          "description" : "name of maintenance window."
+        },
+        "config" : {
+          "example" : "12600",
+          "description" : "start time for the eNodeB maintenance window.",
+          "$ref" : "#/definitions/MaintenanceWindowConfig"
+        }
+      },
+      "description" : "start and end time for maintenance window"
+    },
+    "MaintenanceWindowConfig" : {
+      "type" : "object",
+      "properties" : {
+        "startTimeSeconds" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "endTimeSeconds" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "requestTimeoutSeconds" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "emsMaxConcurrentRequests" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "emsMaxConsecutiveTimeouts" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "emsQuiesceTimeSeconds" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "scheduleRetentionInDays" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "NameValue" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ScheduleMessage" : {
+      "type" : "object",
+      "properties" : {
+        "domain" : {
+          "type" : "string"
+        },
+        "scheduleId" : {
+          "type" : "string"
+        },
+        "scheduleName" : {
+          "type" : "string"
+        },
+        "userId" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "domainData" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/NameValue"
+          }
+        },
+        "globalRrule" : {
+          "type" : "string"
+        },
+        "events" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/EventMessage"
           }
         }
       }
     },
-    "/testGet": {
-      "get": {
-        "tags": [
-          "test"
-        ],
-        "summary": "Some Sum",
-        "description": "",
-        "operationId": "getTest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "test id",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/test"
-            }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
+    "Submarket include/exclude status" : {
+      "type" : "object",
+      "properties" : {
+        "submarket" : {
+          "type" : "string",
+          "description" : "Name of the sub market."
+        },
+        "include" : {
+          "type" : "boolean",
+          "description" : "Sub market is in the include list"
+        },
+        "exclude" : {
+          "type" : "boolean",
+          "description" : "Sub market is in the exclude list."
         }
-      }
+      },
+      "description" : "Returns status of submarket"
     },
-    "/testPatch": {
-      "patch": {
-        "tags": [
-          "test"
-        ],
-        "summary": "Some Sum",
-        "description": "",
-        "operationId": "patchTest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "test id",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/test"
-            }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
+    "Submarket include/exclude test status" : {
+      "type" : "object",
+      "properties" : {
+        "submarket" : {
+          "type" : "string",
+          "description" : "Name of the sub market."
+        },
+        "included" : {
+          "type" : "boolean",
+          "description" : "Sub market will be included"
         }
-      }
-    },
-    "/testHead": {
-      "head": {
-        "tags": [
-          "test"
-        ],
-        "summary": "Some Sum",
-        "description": "",
-        "operationId": "headTest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      }
-    },
-    "/testDelete": {
-      "delete": {
-        "tags": [
-          "test"
-        ],
-        "summary": "Some Sum",
-        "description": "",
-        "operationId": "deleteTest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "id",
-            "description": "test id",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/test"
-            }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      }
-    },
-    "/testOther": {
-      "options": {
-        "tags": [
-          "test"
-        ],
-        "summary": "Some Sum",
-        "description": "",
-        "operationId": "otherTest",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      }
+      },
+      "description" : "Returns status of submarket test"
     }
   }
 }
