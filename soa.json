@@ -1,40 +1,40 @@
 {
-    "serviceName": "scheduler",
-    "serviceGroup": "ECOMP",
-    "servicePort": 32556,
-    "serviceVersion": "3.0",
+  "serviceName": "schedulercalendar2",
+  "serviceGroup": "ECOMP",
+  "servicePort": 32559,
+  "serviceVersion": "2.0",
 
-    "description": "ECOMP Scheduler API",
+  "description": "ECOMP Scheduler Calendar API",
 
-    "tags": ["scheduler", "ecomp"],
-    "attributes": {
-        "att1": ["att1.1", "att1.2"],
-        "att2": ["att2.1", "att2.2"]
+  "tags": ["scheduler", "calendar", "ecomp"],
+  "attributes": {
+    "att1": ["att1.1", "att1.2"],
+    "att2": ["att2.1", "att2.2"]
+  },
+  "program": ["5G"],
+
+  "swaggerFilename": "/scheduler-calendar/swagger.json",
+
+  "maintenance": {
+    "port": {
+      "type": "inherit"
     },
-    "program": ["5G"],
+    "readiness": "/heartbeat"
+  },
 
-    "swaggerFilename": "/swagger.json",
+  "type": "service",
+  "prerequisites": {
+    "cpu": " ",
+    "memory": " "
+  },
 
-    "maintenance": {
-        "port": {
-            "type": "inherit"
-        },
-        "readiness": "/heartbeat"
-    },
+  "requestTimeout": 30,
+  "requestTimeoutRenewal": 6,
 
-    "type": "service",
-    "prerequisites": {
-        "cpu": " ",
-        "memory": " "
-    },
-
-    "requestTimeout": 30,
-    "requestTimeoutRenewal": 6,
-
-    "extKeyRequired": true,
-    "oauth": true,
-    "urac": true,
-    "urac_Profile": true,
-    "urac_ACL": false,
-    "provision_ACL": false
+  "extKeyRequired": true,
+  "oauth": true,
+  "urac": true,
+  "urac_Profile": true,
+  "urac_ACL": false,
+  "provision_ACL": false
 }
