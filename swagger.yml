@@ -1,0 +1,25 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: shopping
+host: localhost
+basePath: /shopping
+schemes:
+- http
+paths:
+  /CheckPhoneNumber:
+    get:
+      tags:
+      - product
+      summary: 'Check phone number with license'
+      operationId: checkphone
+      parameters:
+      -
+        name: phoneNumber
+        required: true
+        in: query
+        type: string
+      -
+        name: licenseKey
+        in: query
+        type: string

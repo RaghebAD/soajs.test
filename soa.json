@@ -1,40 +1,41 @@
 {
-    "serviceName": "schedulercellsite2",
-    "serviceGroup": "ECOMP",
-    "servicePort": 32558,
-    "serviceVersion": "2.0",
+  "serviceName": "phone",
+  "serviceGroup": "demo",
+  "servicePort": 4900,
+  "serviceVersion": "1",
 
-    "description": "ECOMP Scheduler Cellsite API",
+  "description": "To check the phone number with license",
 
-    "tags": ["scheduler", "cellsite", "ecomp"],
-    "attributes": {
-        "att1": ["att1.1", "att1.2"],
-        "att2": ["att2.1", "att2.2"]
+  "tags": ["phone", "phonenumber", "checknumber"],
+  "attributes": {
+    "att1": ["att1.1", "att1.2"],
+    "att2": ["att2.1", "att2.2"]
+  },
+  "program": ["Demo"],
+
+  "swaggerFilename": "swagger.yml",
+
+  "maintenance": {
+    "port": {
+      "type": "inherit"
     },
-    "program": ["Cellsite"],
+    "readiness": "/heartbeat"
+  },
 
-    "swaggerFilename": "/swagger.json",
+  "type": "service",
 
-    "maintenance": {
-        "port": {
-            "type": "inherit"
-        },
-        "readiness": "/heartbeat"
-    },
+  "prerequisites": {
+    "cpu": " ",
+    "memory": " "
+  },
 
-    "type": "service",
-    "prerequisites": {
-        "cpu": " ",
-        "memory": " "
-    },
+  "requestTimeout": 30,
+  "requestTimeoutRenewal": 5,
 
-    "requestTimeout": 30,
-    "requestTimeoutRenewal": 6,
-
-    "extKeyRequired": true,
-    "oauth": true,
-    "urac": true,
-    "urac_Profile": true,
-    "urac_ACL": false,
-    "provision_ACL": false
+  "extKeyRequired": true,
+  "oauth": true,
+  "urac": false,
+  "urac_Profile": false,
+  "urac_ACL": false,
+  "provision_ACL": false
 }
