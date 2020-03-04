@@ -2,7 +2,7 @@
   "serviceName": "manoopml",
   "serviceGroup": "manoopml",
   "servicePort": 32559,
-  "serviceVersion": "2.0",
+  "serviceVersion": "2.3",
 
   "description": "ECOMP Scheduler Calendar API",
 
