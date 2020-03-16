@@ -1,26 +1,20 @@
 {
-  "serviceName": "manoopml",
-  "serviceGroup": "manoopml",
-  "servicePort": 32559,
-  "serviceVersion": "2.3",
+  "serviceName": "micro1",
+  "serviceGroup": "Example",
+  "servicePort": 4991,
+  "serviceVersion": "1",
 
-  "description": "ECOMP Scheduler Calendar API",
+  "extKeyRequired": true,
+  "oauth": false,
 
-  "tags": ["scheduler", "calendar", "ecomp"],
-  "attributes": {
-    "att1": ["att1.1", "att1.2"],
-    "att2": ["att2.1", "att2.2"]
-  },
-  "program": ["5G"],
+  "urac": true,
+  "urac_Profile": false,
 
-  "swaggerFilename": "/swagger.json",
-
-  "maintenance": {
-    "port": {
-      "type": "inherit"
-    },
-    "readiness": "/heartbeat"
-  },
+  "requestTimeout": 30,
+  "requestTimeoutRenewal": 5,
+  "swagger": true,
+  "urac_ACL": false,
+  "provision_ACL": false,
 
   "type": "service",
   "prerequisites": {
@@ -28,13 +22,10 @@
     "memory": " "
   },
 
-  "requestTimeout": 30,
-  "requestTimeoutRenewal": 6,
-
-  "extKeyRequired": true,
-  "oauth": true,
-  "urac": true,
-  "urac_Profile": true,
-  "urac_ACL": false,
-  "provision_ACL": false
+  "maintenance": {
+    "port": {
+      "type": "inherit"
+    },
+    "readiness": "/heartbeat"
+  }
 }
