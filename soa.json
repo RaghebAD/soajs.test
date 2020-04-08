@@ -2,7 +2,7 @@
   "serviceName": "micro1",
   "serviceGroup": "Example",
   "servicePort": 4991,
-  "serviceVersion": "1",
+  "serviceVersion": "2",
 
   "extKeyRequired": true,
   "oauth": false,
