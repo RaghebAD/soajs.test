@@ -3,7 +3,7 @@
   "serviceGroup": "Example",
   "servicePort": 4991,
   "serviceVersion": "1",
-
+  "description": "description is description",
   "extKeyRequired": true,
   "oauth": false,
 
