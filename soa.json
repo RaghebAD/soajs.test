@@ -6,24 +6,21 @@
   "description": "description is description",
   "extKeyRequired": true,
   "oauth": false,
-
   "urac": true,
   "urac_Profile": false,
-
   "requestTimeout": 30,
   "requestTimeoutRenewal": 5,
   "swagger": true,
   "urac_ACL": false,
   "provision_ACL": false,
-
   "type": "service",
   "prerequisites": {
     "cpu": " ",
     "memory": " "
   },
   "documentation": {
-    "readme" : "README.md",
-    "release" : "RELEASE.md"
+    "readme": "README.md",
+    "release": "RELEASE.md"
   },
   "swaggerFilename": "swagger.json",
   "maintenance": {
