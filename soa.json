@@ -22,7 +22,10 @@
     "cpu": " ",
     "memory": " "
   },
-
+  "documentation": {
+    "readme": "README.md",
+  },
+  "swaggerFilename": "swagger.json",
   "maintenance": {
     "port": {
       "type": "inherit"
