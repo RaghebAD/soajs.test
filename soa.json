@@ -23,7 +23,7 @@
     "memory": " "
   },
   "documentation": {
-    "readme": "README.md",
+    "readme": "README.md"
   },
   "swaggerFilename": "swagger.json",
   "maintenance": {
