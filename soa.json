@@ -1,7 +1,8 @@
 {
   "name": "micro1",
-  "grop": "Example",
+  "group": "Example",
   "description": "sdsdsdsd",
+  "version": "1.0",
   "type": "static",
   "documentation": {
     "readme": "README.md",
