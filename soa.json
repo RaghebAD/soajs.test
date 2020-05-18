@@ -18,6 +18,29 @@
     "cpu": " ",
     "memory": " "
   },
+  "tags": [
+    "tag1",
+    "tag2",
+    "tag4"
+  ],
+  "attributes": {
+    "att1": [
+      "att1.5",
+      "att1.6",
+      "att1.7"
+    ],
+    "att2": [
+      "att2.21",
+      "att2.22"
+    ]
+  },
+  "tab": {
+    "main": "micro1-tab",
+    "sub": "micro1-subtab"
+  },
+  "program": [
+    "program4"
+  ],
   "documentation": {
     "readme": "README.md",
     "release": "RELEASE.md"
