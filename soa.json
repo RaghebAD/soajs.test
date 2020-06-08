@@ -22,7 +22,6 @@
     "readme": "README.md",
     "release": "RELEASE.md"
   },
-  "swaggerFilename": "swagger.json",
   "maintenance": {
     "port": {
       "type": "inherit"
