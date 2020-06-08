@@ -5,8 +5,8 @@
   "version": "1.0",
   "type": "static",
   "tab": {
-    "main": "Main tab",
-    "sub": "Sub tab"
+    "main": "Main-tab",
+    "sub": "Sub-tab"
   },
 
   "documentation": {
