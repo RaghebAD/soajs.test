@@ -3,7 +3,7 @@
   "group": "config",
   "description": "sdsdsdsd",
   "version": "1.0",
-  "type": "static",
+  "type": "config",
   "tab": {
     "main": "Main-tab",
     "sub": "Sub-tab"
